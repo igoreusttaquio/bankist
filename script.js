@@ -36,12 +36,12 @@ const account4 = {
 const accounts = [account1, account2, account3, account4];
 
 function computeUsernames(accs) {
-  accs.forEach(function(acc) {
+  accs.forEach(function (acc) {
     acc.username = acc.owner
-    .toLocaleLowerCase()
-    .split(' ')
-    .map(word => word[0])
-    .join('');  
+      .toLocaleLowerCase()
+      .split(' ')
+      .map(word => word[0])
+      .join('');
   });
 }
 
@@ -79,7 +79,9 @@ const displayMovements = function (movements) {
     const type = movement > 0 ? 'deposit' : 'withdrawal';
     const html = `
     <div class="movements__row">
-      <div class="movements__type movements__type--${type}">${index +1} ${type}</div>
+      <div class="movements__type movements__type--${type}">${
+      index + 1
+    } ${type}</div>
       <div class="movements__date">today</div>
       <div class="movements__value">${movement}</div>
     </div>
@@ -102,8 +104,18 @@ const currencies = new Map([
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-const deposits = movements.filter((mov) => mov > 0);
-const withdrawals = movements.filter((mov) => mov < 0);
-console.log(deposits, withdrawals);
+const deposits = movements.filter(mov => mov > 0);
+const withdrawals = movements.filter(mov => mov < 0);
+
+function calcDisplayMovements(movements) {
+  const balance = movements.reduce(function (accumulator, current, index, array) {
+    return accumulator + current;
+  }, 0);
+  labelBalance.textContent = `${balance} EUR`;
+}
+
+calcDisplayMovements(movements);
+
+console.log(balance);
 
 /////////////////////////////////////////////////
