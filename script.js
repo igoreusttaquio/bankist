@@ -35,6 +35,18 @@ const account4 = {
 
 const accounts = [account1, account2, account3, account4];
 
+function computeUsernames(accs) {
+  accs.forEach(function(acc) {
+    acc.username = acc.owner
+    .toLocaleLowerCase()
+    .split(' ')
+    .map(word => word[0])
+    .join('');  
+  });
+}
+
+computeUsernames(accounts);
+
 // Elements
 const labelWelcome = document.querySelector('.welcome');
 const labelDate = document.querySelector('.date');
